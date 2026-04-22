@@ -1,0 +1,48 @@
+class Solution {
+    /**
+     * @param {number[]} nums1
+     * @param {number} m
+     * @param {number[]} nums2
+     * @param {number} n
+     * @return {void} Do not return anything, modify nums1 in-place instead.
+     */
+    merge(nums1, m, nums2, n) {
+        let i = m - 1;
+        let j = n - 1;
+        let k = m + n - 1;
+
+        while (j >= 0) {
+            if (i < 0 || nums1[i] > nums2[j]) {
+                if (i >= 0) {
+                    nums1[k] = nums1[i];
+                    i--;
+                } else {
+                    nums1[k] = nums2[j]
+                    j--
+                }
+                k--;
+            } else if (nums2[j] >= nums1[i]) {
+                nums1[k] = nums2[j]
+                k--;
+                j--;
+            } else if (nums2[j] < nums1[i]) {
+                nums1[k] = nums1[i]
+                k--;
+                i--;
+            }
+
+            console.log(nums1)
+        }
+    }
+}
+
+// [10, 20, 20, 40, 0, 0] - [1, 2]
+//               i     k        j
+// [10, 20, 20, 40, 0, 40] - [1, 2]
+//           i      k            j
+// [10, 20, 20, 40, 20, 40] - [1, 2]
+//       i      k                 j
+// [10, 20, 20, 20, 20, 40] - [1, 2]
+//   i      k                     j
+// [10, 20, 10, 20, 20, 40] - [1, 2]
+//   i   k                     j
